@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bomberman Nature Quest - Game</title>
+    <link rel="stylesheet" href="/style/style.css" />
+    <link rel="stylesheet" href="/style/game-screen.css" />
+  </head>
+  <style>
+    .difficulty-indicator {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 4px 6px;
+      border-radius: 8px;
+      font-size: 11px;
+    }
+
+    .enemy-level {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 6px;
+      border-radius: 5px;
+      font-weight: 500;
+
+      opacity: 1;
+      box-shadow: none;
+    }
+
+    .enemy-level.active {
+      opacity: 1;
+      box-shadow: none;
+    }
+
+    .enemy-level.easy {
+      background: rgba(50, 205, 50, 0.25); 
+      color: #32cd32;
+    }
+
+    .enemy-level.medium {
+      background: rgba(255, 165, 0, 0.25); 
+      color: #ffa500;
+    }
+
+    .enemy-level.hard {
+      background: rgba(220, 20, 60, 0.25); 
+      color: #dc143c;
+    }
+
+    .enemy-icon {
+      font-size: 14px;
+    }
+
+    .enemy-text {
+      letter-spacing: 0.3px;
+    }
+  </style>
+
+  <body>
+    <!-- Animated Background Particles -->
+    <div id="bg-particles"></div>
+
+    <div id="game-container" class="screen">
+      <div class="game-header">
+        <div class="header-left">
+          <button id="restart-btn" class="restart-button">
+            <span>🔄</span> Restart
+          </button>
+          <div class="game-timer">
+            <span class="timer-icon">⏱️</span>
+            <span class="timer-text">05:00</span>
+          </div>
+        </div>
+
+        <div class="game-title">
+          <span class="leaf-left">🍃</span>
+          <img src="/sprites/judul.png" alt="BOMBENQ" class="title-logo" />
+          <span class="leaf-right">🍃</span>
+        </div>
+
+        <div class="header-right">
+          <div class="difficulty-indicator">
+            <div class="enemy-level easy">
+              <span class="enemy-icon">🐺</span>
+              <span class="enemy-text">Easy</span>
+            </div>
+            <div class="enemy-level medium">
+              <span class="enemy-icon">🐯</span>
+              <span class="enemy-text">Medium</span>
+            </div>
+            <div class="enemy-level hard">
+              <span class="enemy-icon">🦁</span>
+              <span class="enemy-text">Hard</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-main">
+        <div class="player-panel left">
+          <div class="player-card p1">
+            <div class="player-avatar">🐻</div>
+            <div class="player-name">Forest Guardian</div>
+            <div class="lives">❤️❤️❤️</div>
+            <div class="powerups-section">
+              <div class="powerup-item">
+                <span class="icon">💣</span>
+                <span class="value" id="p1-bombs">1</span>
+              </div>
+              <div class="powerup-item">
+                <span class="icon">🔥</span>
+                <span class="value" id="p1-range">1</span>
+              </div>
+              <div class="powerup-item">
+                <span class="icon">🌪️</span>
+                <span class="value" id="p1-speed">1</span>
+              </div>
+            </div>
+            <div class="controls-hint">
+              <div>WASD - Move</div>
+              <div>SPACE - Bomb</div>
+            </div>
+          </div>
+        </div>
+
+        <div id="game-board-wrapper">
+          <div id="effect-popups"></div>
+          <div id="game-board"></div>
+        </div>
+
+        <div class="player-panel right">
+          <div class="player-card p2">
+            <div class="player-avatar">🦊</div>
+            <div class="player-name">Wild Explorer</div>
+            <div class="lives">❤️❤️❤️</div>
+            <div class="powerups-section">
+              <div class="powerup-item">
+                <span class="icon">💣</span>
+                <span class="value" id="p2-bombs">1</span>
+              </div>
+              <div class="powerup-item">
+                <span class="icon">🔥</span>
+                <span class="value" id="p2-range">1</span>
+              </div>
+              <div class="powerup-item">
+                <span class="icon">🌪️</span>
+                <span class="value" id="p2-speed">1</span>
+              </div>
+            </div>
+            <div class="controls-hint">
+              <div>Arrows - Move</div>
+              <div>ENTER - Bomb</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="game-over-overlay" style="display: none">
+      <div class="game-over-content">
+        <div class="trophy">🏆</div>
+        <h1 id="game-over-text">Game Over!</h1>
+        <p id="final-score">Score: 0</p>
+        <button id="play-again-btn"><span>🎮</span> Play Again</button>
+      </div>
+    </div>
+
+    <div id="question-overlay" style="display: none">
+      <div class="question-box">
+        <div class="question-header">
+          <span class="question-icon">📚</span>
+          <h3>Nature Challenge</h3>
+        </div>
+        <p id="question-text">Question appears here</p>
+        <div id="options-container" class="options"></div>
+      </div>
+    </div>
+
+    <script src="/question.js"></script>
+    <script src="game.js"></script>
+
+    <audio id="backgroundMusic" loop>
+      <source src="/sprites/backsound.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+  </body>
+</html>

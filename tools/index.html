@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bomberman English Quest</title>
+
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="/style/start-screen.css">
+
+    <style>
+        #sound-popup {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            cursor: pointer;
+        }
+
+        .popup-box {
+            background: #0f172a;
+            padding: 30px 40px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(0,0,0,0.6);
+            animation: pulse 1.5s infinite;
+        }
+
+        .popup-box h2 {
+            margin: 0 0 10px;
+            font-size: 28px;
+            color: #fff;
+        }
+
+        .popup-box p {
+            margin: 0;
+            font-size: 16px;
+            opacity: 0.8;
+            color: #e5e7eb;
+        }
+
+        .popup-box span {
+            font-size: 42px;
+            display: block;
+            margin-top: 10px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="sound-popup">
+    <div class="popup-box">
+        <h2>🎮 Welcome!</h2>
+        <p>Click to enable sound</p>
+        <span>🔊</span>
+    </div>
+</div>
+
+<div id="start-screen" class="screen">
+    <div class="bg-animated">
+        <div class="book-float book1">📚</div>
+        <div class="book-float book2">📖</div>
+        <div class="book-float book3">📘</div>
+        <div class="book-float book4">📕</div>
+    </div>
+
+    <div class="start-content">
+        <div class="logo-section">
+            <img src="../sprites/Judul.png" alt="Bomber English Logo" class="game-logo">
+            <p class="tagline">Learn English Through Explosive Action!</p>
+        </div>
+
+        <div class="feature-cards">
+            <div class="feature-card">
+                <div class="feature-icon">💣</div>
+                <h3>Plant Bombs</h3>
+                <p>Strategic gameplay</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📝</div>
+                <h3>Answer Quiz</h3>
+                <p>English questions</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏆</div>
+                <h3>Win Battle</h3>
+                <p>2 player mode</p>
+            </div>
+        </div>
+
+        <button id="start-btn" class="pulse-btn">
+            <span class="btn-text">START ADVENTURE</span>
+            <span class="btn-icon">🚀</span>
+        </button>
+    </div>
+</div>
+
+<audio id="backgroundMusic" loop>
+    <source src="/sprites/backsoundstart.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const music = document.getElementById('backgroundMusic');
+const popup = document.getElementById('sound-popup');
+
+
+popup.addEventListener('click', () => {
+    music.volume = 0.5;
+    music.play()
+        .then(() => {
+            popup.style.display = 'none';
+            console.log('Sound enabled');
+        })
+        .catch(err => {
+            console.log('Audio blocked:', err);
+            popup.style.display = 'none';
+        });
+});
+
+document.getElementById('start-btn').addEventListener('click', () => {
+    window.location.href = 'game.html';
+});
+</script>
+
+</body>
+</html>
