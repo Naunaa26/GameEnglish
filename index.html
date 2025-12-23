@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bomberman English Quest</title>
 
-    <link rel="stylesheet" href="/style/style.css">
-    <link rel="stylesheet" href="/style/start-screen.css">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/start-screen.css">
 
     <style>
         #sound-popup {
@@ -76,7 +76,7 @@
 
     <div class="start-content">
         <div class="logo-section">
-            <img src="/sprites/Judul.png" alt="Bomber English Logo" class="game-logo">
+            <img src="sprites/Judul.png" alt="Bomber English Logo" class="game-logo">
             <p class="tagline">Learn English Through Explosive Action!</p>
         </div>
 
@@ -106,13 +106,12 @@
 </div>
 
 <audio id="backgroundMusic" loop>
-    <source src="/sprites/backsoundstart.mp3" type="audio/mpeg">
+    <source src="sprites/backsoundstart.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 const music = document.getElementById('backgroundMusic');
 const popup = document.getElementById('sound-popup');
-
 
 popup.addEventListener('click', () => {
     music.volume = 0.5;
@@ -128,6 +127,7 @@ popup.addEventListener('click', () => {
 });
 
 document.getElementById('start-btn').addEventListener('click', () => {
+    // FIX: Hapus '/' di depan tools
     window.location.href = 'tools/game.html'; 
 });
 
